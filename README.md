@@ -15,7 +15,7 @@ https://github.com/ashinkarov/i3-extras/blob/master/i3bar-xbm-icons.patch
 
 And the result:
 
-[i3](http://issacsharp.com/misc/i3.png "i3")
+![i3](http://issacsharp.com/misc/i3.png "i3")
 
 Build:
 ```
