@@ -141,6 +141,8 @@ static int stdin_start_array(void *context) {
         FREE(first->color);
         FREE(first->name);
         FREE(first->instance);
+        FREE(first->icon_color);
+        xbm_free (first->icon);
         TAILQ_REMOVE(&statusline_head, first, blocks);
         free(first);
     }
@@ -186,6 +188,15 @@ static int stdin_string(void *context, const unsigned char *val, size_t len) {
     }
     if (strcasecmp(ctx->last_map_key, "color") == 0) {
         sasprintf(&(ctx->block.color), "%.*s", len, val);
+    }
+    if (strcasecmp(ctx->last_map_key, "icon") == 0) {
+        char * s;
+        sasprintf(&s, "%.*s", len, val);
+        ctx->block.icon = xbm_from_file(s);
+        FREE(s);
+    }
+    if (strcasecmp(ctx->last_map_key, "icon_color") == 0) {
+        sasprintf(&(ctx->block.icon_color), "%.*s", len, val);
     }
     if (strcasecmp(ctx->last_map_key, "align") == 0) {
         if (len == strlen("left") && !strncmp((const char *)val, "left", strlen("left"))) {
